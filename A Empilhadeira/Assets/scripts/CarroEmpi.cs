@@ -30,6 +30,8 @@ public class CarroEmpi : MonoBehaviour
     public float scrollSpeed = 1f; // Velocidade de movimento da faca com o scroll
     private float currentYPosition;
 
+    public float target;
+
     private void Start()
     {
         currentYPosition = faca.localPosition.y;
@@ -48,11 +50,13 @@ public class CarroEmpi : MonoBehaviour
 
         // Restringe a posição Y entre facamin e facamax
         currentYPosition = Mathf.Clamp(currentYPosition, facamin, facamax);
+    
 
         // Atualiza a posição da faca
         Vector3 newPosition = faca.localPosition;
         newPosition.y = currentYPosition;
-        faca.localPosition = newPosition;
+        faca.localPosition = Vector3.Lerp(faca.localPosition, newPosition, target*Time.deltaTime);
+        
 
 
 
